@@ -1,7 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CdkDrag, CdkDropList, CdkDropListGroup, CdkDragDrop, CdkDragMove, moveItemInArray } from '@angular/cdk/drag-drop'
-import { ViewportRuler } from "@angular/cdk/overlay";
 import { HeaderComponent } from './components/header/header.component';
 import { ItemBoxComponent } from './components/item-box/item-box.component';
 import { NgFor } from '@angular/common';
