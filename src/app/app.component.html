@@ -8,7 +8,7 @@
   <div cdkDropListGroup class="container">
     <div cdkDropList (cdkDropListDropped)="drop($event)">
       @for (item of items; track item) {
-        <app-item-box type={{item}}></app-item-box>
+        <app-item-box type={{item.type}}></app-item-box>
       }
     </div>
   </div>

@@ -14,23 +14,23 @@ import { NgFor } from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  @ViewChild(CdkDropListGroup) listGroup: CdkDropListGroup<CdkDropList>;
-  @ViewChild(CdkDropList) placeholder: CdkDropList;
-
   public gridSize = 50;
   public gridMargin = 10;
   public items = [
-    'textbox',
-    'image'
+    { id: 1, type: 'textbox' },
+    { id: 2, type: 'image' }
   ]
 
-  drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
+  drop(event: CdkDragDrop<{id: number, type: string}[]>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
   }
 
-  add(item: string) {
-    this.items.push(item)
+  add(itemType: string) {
+    const highestId = this.items.reduce(function(prev, current) {
+      return (prev && prev.id > current.id) ? prev : current
+    });
+    const newItem = { id: highestId.id++, type: itemType };
+    this.items.push(newItem)
   }
 
   save() {
