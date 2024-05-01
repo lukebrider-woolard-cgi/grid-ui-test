@@ -1,0 +1,14 @@
+.text-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing:border-box;
+  padding: 1em;
+  background-color: white;
+  outline: solid 1px black;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  resize: none;
+}
