@@ -5,9 +5,9 @@
     <button (click)="add('image')">Add Image</button>
     <button (click)="save()">Save</button>
   </div>
-  <div class="container">
-    <app-parent-for-items [components]="components" (dragDropEvent)="drop($event)" *ngFor="let component of components"
-      [component]="component">
-    </app-parent-for-items>
+  <div cdkDropList class="container" (cdkDropListDropped)="drop($event)">
+    @for (item of items; track item) {
+      <app-item-box type={{item}}></app-item-box> 
+    }
   </div>
 </div>

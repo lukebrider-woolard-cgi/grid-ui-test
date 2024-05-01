@@ -1,30 +1,28 @@
 import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { CdkDragDrop,  moveItemInArray } from '@angular/cdk/drag-drop'
+import { CdkDropList, CdkDragDrop,  moveItemInArray } from '@angular/cdk/drag-drop'
 import { HeaderComponent } from './components/header/header.component';
-import { ParentForItemsComponent } from './components/parent-for-items/parent-for-items.component';
+import { ItemBoxComponent } from './components/item-box/item-box.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgFor, HeaderComponent, ParentForItemsComponent],
+  imports: [RouterOutlet, CdkDropList, HeaderComponent, ItemBoxComponent,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  public components = [
+  public items = [
     'textbox',
-    'image',
+    'image'
   ]
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
-    moveItemInArray(this.components, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
   }
 
-  add(component: string) {
-    this.components.push(component)
+  add(item: string) {
+    this.items.push(item)
   }
 
   save() {
