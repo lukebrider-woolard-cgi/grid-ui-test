@@ -5,11 +5,24 @@
     <button (click)="add('image')">Add Image</button>
     <button (click)="save()">Save</button>
   </div>
-  <div cdkDropListGroup class="container">
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
-      @for (item of items; track item) {
-        <app-item-box type={{item.type}}></app-item-box>
-      }
+  <div class="container" #gridBounds>
+    <div ngDraggable ngResizable
+      [bounds]="gridBounds"
+      [inBounds]="true"
+      [gridSize]="gridSize"
+      [handle]="handle"
+      [rzGrid]="gridSize"
+      [preventDefaultEvent]="true"
+      (endOffset)="onMoveEnd($event, item)"
+      (rzStop)="onResizeStop($event, item)"
+      class="item-box"
+      *ngFor="let item of items"
+    >
+      <div class="move-handle" #handle>
+        <mat-icon aria-hidden="false" aria-lable="Drag and drop" fontIcon="drag_indicator"></mat-icon>
+      </div>
+      <app-image-box *ngIf="item.type == 'image'"></app-image-box>
+      <app-text-box *ngIf="item.type == 'textbox'"></app-text-box>
     </div>
   </div>
 </div>
