@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { CdkDrag, CdkDragMove, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
 import { TextBoxComponent } from '../text-box/text-box.component';
 import { ImageBoxComponent } from '../image-box/image-box.component';
@@ -14,9 +14,4 @@ import { ImageBoxComponent } from '../image-box/image-box.component';
 })
 export class ItemBoxComponent {
   @Input() type: string;
-  // @Output() dragMovedEvent = new EventEmitter<CdkDragMove>();
-
-  // dragMoved(event: CdkDragMove) {
-  //   this.dragMovedEvent.emit(event);
-  // }
 }
