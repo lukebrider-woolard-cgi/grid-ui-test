@@ -1,12 +1,18 @@
 .container {
+  display: flex;
+  flex-wrap: wrap;
   max-width: 1200px;
   height: 600px;
   margin: 30px auto;
   overflow: none;
   min-height: 300px;
   border: 1px solid steelblue;
-  padding: 30px;
   border-radius: 5px;
+}
+.cdk-drop-list {
+  /* display: flex; */
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
 .button-bar {
   display: flex;
