@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { AngularDraggableModule } from 'angular2-draggable';
 import { IResizeEvent } from 'angular2-draggable/lib/models/resize-event'
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { HeaderComponent } from './components/header/header.component';
 import { TextBoxComponent } from './components/text-box/text-box.component';
 import { ImageBoxComponent } from './components/image-box/image-box.component';
-import { NgFor, NgIf, NgStyle } from '@angular/common';
+
 
 export class Item {
   id: number;
@@ -20,15 +24,24 @@ export class Item {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AngularDraggableModule, MatIconModule, HeaderComponent, TextBoxComponent, ImageBoxComponent, NgFor, NgIf, NgStyle],
+  imports: [RouterOutlet, NgFor, NgIf, NgStyle, FormsModule, AngularDraggableModule, MatFormFieldModule, MatIconModule, MatInputModule, HeaderComponent, TextBoxComponent, ImageBoxComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  gridSize = 100;
-  gridGutter = 10;
+  gridSize: number = 100;
+  noOfColumns: number = 12;
+  noOfRows: number = 6;
+  gridGutter: number = 10;
 
   items: Item[] = [];
+
+  styleGrid(): Object {
+    return {
+      width: `${this.gridSize * this.noOfColumns}px`,
+      height: `${this.gridSize * this.noOfRows}px`
+    };
+  }
 
   styleItem(item: Item): Object {
     return {
@@ -79,7 +92,7 @@ export class AppComponent {
 
   add(itemType: string) {
     const newId = this.items.length > 0 ? Math.max.apply(null, this.items.map(item => item.id))+1 : 0;
-    const newItem = { id: newId, type: itemType, offsetX: 0, offsetY: 0, width: 200, height: 200 };
+    const newItem = { id: newId, type: itemType, offsetX: 0, offsetY: 0, width: this.gridSize, height: this.gridSize };
     this.items.push(newItem);
   }
 

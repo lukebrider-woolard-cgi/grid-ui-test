@@ -1,19 +1,33 @@
-.container {
-  position: relative;
-  max-width: 1200px;
-  height: 600px;
-  margin: 30px auto;
-  overflow: none;
-  min-height: 300px;
+.grid-form-container {
+  margin: 0 200px;
   border: 1px solid steelblue;
   border-radius: 5px;
+}
+.grid-form-container h4 {
+  margin-left: 10px;
+}
+.grid-form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.grid-form-input {
+  margin: 0 10px;
 }
 .button-bar {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 button {
   margin-right: 4px;
+}
+.container {
+  position: relative;
+  margin: 10px auto;
+  overflow: none;
+  border: 1px solid steelblue;
+  border-radius: 5px;
 }
 .item-bounds {
   position: absolute;
