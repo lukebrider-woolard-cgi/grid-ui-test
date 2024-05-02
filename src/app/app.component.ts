@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from './components/header/header.component';
 import { TextBoxComponent } from './components/text-box/text-box.component';
 import { ImageBoxComponent } from './components/image-box/image-box.component';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
 
 export class Item {
   id: number;
@@ -20,36 +20,40 @@ export class Item {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AngularDraggableModule, MatIconModule, HeaderComponent, TextBoxComponent, ImageBoxComponent, NgFor, NgIf],
+  imports: [RouterOutlet, AngularDraggableModule, MatIconModule, HeaderComponent, TextBoxComponent, ImageBoxComponent, NgFor, NgIf, NgStyle],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  public gridSize = 100;
+  gridSize = 100;
 
-  public items: Item[] = [
-    { id: 1, type: 'textbox', offsetX: 0, offsetY: 0, width: 200, height: 200 },
-    { id: 2, type: 'image', offsetX: 0, offsetY: 200, width: 200, height: 200 }
-  ]
+  items: Item[] = [];
 
-  public offset = { x: 0, y: 0 };
-  public size = { "width": 0, "height": 0 };
+  styleItem(item: Item): Object {
+    return {
+      left: `${item.offsetX}px`,
+      top: `${item.offsetY}px`,
+      width: `${item.width}px`,
+      height: `${item.height}px`
+    };
+  }
 
   onMoveEnd(event: { x: number, y: number }, updatedItem: Item) {
-    this.items.map((item) => {
+    const updatedItems = this.items.map((item) => {
       if (item.id === updatedItem.id) {
         return {
           ...item,
-          offsetX: event.x,
-          offsetY: event.y
+          offsetX: item.offsetX + event.x,
+          offsetY: item.offsetY + event.y
         };
       }
       return item;
     });
+    this.items = updatedItems;
   }
 
   onResizeStop(event: IResizeEvent, updatedItem: Item) {
-    this.items.map((item) => {
+    const updatedItems = this.items.map((item) => {
       if (item.id === updatedItem.id) {
         return {
           ...item,
@@ -59,17 +63,59 @@ export class AppComponent {
       }
       return item;
     });
+    this.items = updatedItems;
   }
 
   add(itemType: string) {
-    const highestId = this.items.reduce(function(prev, current) {
-      return (prev && prev.id > current.id) ? prev : current
-    });
-    const newItem = { id: highestId.id++, type: itemType, offsetX: 0, offsetY: 0, width: 200, height: 200 };
-    this.items.push(newItem)
+    let nextId = 0;
+    if (this.items.length !== 0) {
+      const newest = this.items.reduce(function(prev, current) {
+        return (prev && prev.id > current.id) ? prev : current
+      });
+      nextId = newest.id++;
+    }
+    const newItem = { id: nextId, type: itemType, offsetX: 0, offsetY: 0, width: 200, height: 200 };
+    this.items.push(newItem);
   }
 
   save() {
     console.log(this.items)
+  }
+
+  load() {
+    this.items = [
+      {
+          "id": 0,
+          "type": "textbox",
+          "offsetX": 600,
+          "offsetY": 100,
+          "width": 200,
+          "height": 300
+      },
+      {
+          "id": 1,
+          "type": "image",
+          "offsetX": 200,
+          "offsetY": 100,
+          "width": 400,
+          "height": 300
+      },
+      {
+          "id": 2,
+          "type": "image",
+          "offsetX": 400,
+          "offsetY": 400,
+          "width": 400,
+          "height": 100
+      },
+      {
+          "id": 3,
+          "type": "textbox",
+          "offsetX": 200,
+          "offsetY": 400,
+          "width": 200,
+          "height": 100
+      }
+    ]
   }
 }

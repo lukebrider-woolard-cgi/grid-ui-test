@@ -8,5 +8,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  title: string = 'Drag and Drop with CSS Resize';
+  title: string = 'Angular2 Draggable Demo';
 }

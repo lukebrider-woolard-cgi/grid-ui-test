@@ -4,25 +4,31 @@
     <button (click)="add('textbox')">Add Textfield</button>
     <button (click)="add('image')">Add Image</button>
     <button (click)="save()">Save</button>
+    <button (click)="load()">Load</button>
   </div>
   <div class="container" #gridBounds>
     <div ngDraggable ngResizable
+      [ngStyle]="styleItem(item)"
       [bounds]="gridBounds"
       [inBounds]="true"
       [gridSize]="gridSize"
       [handle]="handle"
       [rzGrid]="gridSize"
+      [rzMinWidth]="100"
+      [rzMinHeight]="100"
       [preventDefaultEvent]="true"
       (endOffset)="onMoveEnd($event, item)"
       (rzStop)="onResizeStop($event, item)"
-      class="item-box"
+      class="item-bounds"
       *ngFor="let item of items"
     >
+    <div class="item-box">
       <div class="move-handle" #handle>
         <mat-icon aria-hidden="false" aria-lable="Drag and drop" fontIcon="drag_indicator"></mat-icon>
       </div>
-      <app-image-box *ngIf="item.type == 'image'"></app-image-box>
-      <app-text-box *ngIf="item.type == 'textbox'"></app-text-box>
+        <app-image-box *ngIf="item.type == 'image'"></app-image-box>
+        <app-text-box *ngIf="item.type == 'textbox'"></app-text-box>
+      </div>
     </div>
   </div>
 </div>
