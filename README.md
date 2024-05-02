@@ -1,6 +1,7 @@
 # GridstackTest
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+Creating a grid based layout for UI elements that can be dragged and resized on the grid.
 
 ## Development server
 
