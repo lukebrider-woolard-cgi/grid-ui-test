@@ -1,7 +1,7 @@
 <div>
   <app-header></app-header>
   <div class="button-bar">
-    <button (click)="add('textbox')">Add Textfield</button>
+    <button (click)="add('textbox')">Add Textbox</button>
     <button (click)="add('image')">Add Image</button>
     <button (click)="save()">Save</button>
     <button (click)="load()">Load</button>
@@ -18,12 +18,13 @@
       [rzMinWidth]="gridSize"
       [rzMinHeight]="gridSize"
       [preventDefaultEvent]="true"
-      (endOffset)="onMoveEnd($event, item)"
-      (rzStop)="onResizeStop($event, item)"
+      (endOffset)="onMoveEnd($event, item.id)"
+      (rzStop)="onResizeStop($event, item.id)"
       class="item-bounds"
       *ngFor="let item of items"
     >
-    <div [ngStyle]="styleGutter()" class="item-box">
+    <div [ngStyle]="styleGutter()" class="item-box" id={{item.id}}>
+      <mat-icon class="bin-button" aria-hidden="false" aria-lable="Drag and drop" fontIcon="delete" (click)="delete(item.id)">delete</mat-icon>
       <div class="move-handle" #handle>
         <mat-icon aria-hidden="false" aria-lable="Drag and drop" fontIcon="drag_indicator"></mat-icon>
       </div>

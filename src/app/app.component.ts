@@ -49,9 +49,9 @@ export class AppComponent {
     }
   }
 
-  onMoveEnd(event: { x: number, y: number }, updatedItem: Item) {
+  onMoveEnd(event: { x: number, y: number }, updatedItemId: number) {
     const updatedItems = this.items.map((item) => {
-      if (item.id === updatedItem.id) {
+      if (item.id === updatedItemId) {
         return {
           ...item,
           offsetX: item.offsetX + event.x,
@@ -63,9 +63,9 @@ export class AppComponent {
     this.items = updatedItems;
   }
 
-  onResizeStop(event: IResizeEvent, updatedItem: Item) {
+  onResizeStop(event: IResizeEvent, updatedItemId: number) {
     const updatedItems = this.items.map((item) => {
-      if (item.id === updatedItem.id) {
+      if (item.id === updatedItemId) {
         return {
           ...item,
           width: event.size.width,
@@ -81,6 +81,11 @@ export class AppComponent {
     const newId = this.items.length > 0 ? Math.max.apply(null, this.items.map(item => item.id))+1 : 0;
     const newItem = { id: newId, type: itemType, offsetX: 0, offsetY: 0, width: 200, height: 200 };
     this.items.push(newItem);
+  }
+
+  delete(itemId: number) {
+    const itemsWithSelectedItemRemoved = this.items.filter((item) => item.id !== itemId);
+    this.items = itemsWithSelectedItemRemoved;
   }
 
   save() {

@@ -26,6 +26,15 @@ button {
   justify-content: center;
   align-items: center;
 }
+.bin-button {
+  position: absolute;
+  top: 3px;
+  right: 24px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  z-index: 100;
+}
 .move-handle {
   position: absolute;
   top: 3px;
