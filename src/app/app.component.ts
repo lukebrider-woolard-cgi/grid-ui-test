@@ -67,14 +67,8 @@ export class AppComponent {
   }
 
   add(itemType: string) {
-    let nextId = 0;
-    if (this.items.length !== 0) {
-      const newest = this.items.reduce(function(prev, current) {
-        return (prev && prev.id > current.id) ? prev : current
-      });
-      nextId = newest.id++;
-    }
-    const newItem = { id: nextId, type: itemType, offsetX: 0, offsetY: 0, width: 200, height: 200 };
+    const newId = this.items.length > 0 ? Math.max.apply(null, this.items.map(item => item.id))+1 : 0;
+    const newItem = { id: newId, type: itemType, offsetX: 0, offsetY: 0, width: 200, height: 200 };
     this.items.push(newItem);
   }
 
