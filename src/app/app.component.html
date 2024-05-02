@@ -14,15 +14,15 @@
       [gridSize]="gridSize"
       [handle]="handle"
       [rzGrid]="gridSize"
-      [rzMinWidth]="100"
-      [rzMinHeight]="100"
+      [rzMinWidth]="gridSize"
+      [rzMinHeight]="gridSize"
       [preventDefaultEvent]="true"
       (endOffset)="onMoveEnd($event, item)"
       (rzStop)="onResizeStop($event, item)"
       class="item-bounds"
       *ngFor="let item of items"
     >
-    <div class="item-box">
+    <div [ngStyle]="styleGutter()" class="item-box">
       <div class="move-handle" #handle>
         <mat-icon aria-hidden="false" aria-lable="Drag and drop" fontIcon="drag_indicator"></mat-icon>
       </div>

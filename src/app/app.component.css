@@ -19,10 +19,6 @@ button {
   position: absolute;
 }
 .item-box {
-  top: 5px;
-  right: 5px;
-  bottom: 5px;
-  left: 5px;
   background-color: aliceblue;
   outline: solid 1px black;
   position: absolute;

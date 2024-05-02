@@ -26,6 +26,7 @@ export class Item {
 })
 export class AppComponent {
   gridSize = 100;
+  gridGutter = 10;
 
   items: Item[] = [];
 
@@ -36,6 +37,16 @@ export class AppComponent {
       width: `${item.width}px`,
       height: `${item.height}px`
     };
+  }
+
+  styleGutter(): Object {
+    const gutter = this.gridGutter / 2
+    return {
+      top: `${gutter}px`,
+      left: `${gutter}px`,
+      bottom: `${gutter}px`,
+      right: `${gutter}px`
+    }
   }
 
   onMoveEnd(event: { x: number, y: number }, updatedItem: Item) {
