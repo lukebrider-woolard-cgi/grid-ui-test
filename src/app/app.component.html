@@ -1,21 +1,11 @@
 <div>
   <app-header></app-header>
-  <div class="row">
-    <div class="sidebar">
-      <h4>Component Items</h4>
-      <app-item-box [type]="'image'"></app-item-box>
-      <app-item-box [type]="'text'"></app-item-box>
-    </div>
-  </div>
+  <app-item-selection-bar></app-item-selection-bar>
   <!-- <div class="button-bar">
-    <button (click)="add('app-text-box')">Add Textbox</button>
-    <button (click)="add('app-image-box')">Add Image</button>
+    <button (click)="add('text')">Add Textbox</button>
+    <button (click)="add('image')">Add Image</button>
     <button (click)="save()">Save</button>
     <button (click)="load()">Load</button>
   </div> -->
-  <div class="row">
-    <div class="col-md-12">
-      <gridstack class="container" [options]="gridOptions" (changeCB)="onChange($event)" (resizeStopCB)="onResizeStop($event)"></gridstack>
-    </div>
-  </div>
+  <gridstack class="layout-area" [options]="gridOptions" (changeCB)="onChange($event)" (resizeStopCB)="onResizeStop($event)"></gridstack>
 </div>
