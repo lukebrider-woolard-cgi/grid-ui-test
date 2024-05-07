@@ -1,59 +1,21 @@
 <div>
   <app-header></app-header>
-  <div class="grid-form-container">
-    <h4>Grid Settings</h4>
-    <div class="grid-form">
-      <mat-form-field class="grid-form-input">
-        <mat-label>Grid Square Size</mat-label>
-        <input matInput name="gridSize" type="number" min="100" max="300" [(ngModel)]="gridSize">
-        <span matTextSuffix>px</span>
-      </mat-form-field>
-      <mat-form-field class="grid-form-input">
-        <mat-label>Number of Columns</mat-label>
-        <input matInput name="noOfColumns" type="number" min="1" max="16" [(ngModel)]="noOfColumns">
-      </mat-form-field>
-      <mat-form-field class="grid-form-input">
-        <mat-label>Number of Rows</mat-label>
-        <input matInput name="noOfRows" type="number" min="1" max="16" [(ngModel)]="noOfRows">
-      </mat-form-field>
-      <mat-form-field class="grid-form-input">
-        <mat-label>Items Spacing</mat-label>
-        <input matInput name="gridGutter" type="number" min="0" max="50" [(ngModel)]="gridGutter">
-        <span matTextSuffix>px</span>
-      </mat-form-field>
+  <div class="row">
+    <div class="sidebar">
+      <h4>Component Items</h4>
+      <app-item-box [type]="'image'"></app-item-box>
+      <app-item-box [type]="'text'"></app-item-box>
     </div>
   </div>
-  <div class="button-bar">
-    <button (click)="add('textbox')">Add Textbox</button>
-    <button (click)="add('image')">Add Image</button>
+  <!-- <div class="button-bar">
+    <button (click)="add('app-text-box')">Add Textbox</button>
+    <button (click)="add('app-image-box')">Add Image</button>
     <button (click)="save()">Save</button>
     <button (click)="load()">Load</button>
-  </div>
-  <div [ngStyle]="styleGrid()" class="container" #gridBounds>
-    <div ngDraggable ngResizable
-      [ngStyle]="styleItem(item)"
-      [bounds]="gridBounds"
-      [inBounds]="true"
-      [gridSize]="gridSize"
-      [handle]="handle"
-      [rzGrid]="gridSize"
-      [rzContainment]="gridBounds"
-      [rzMinWidth]="gridSize"
-      [rzMinHeight]="gridSize"
-      [preventDefaultEvent]="true"
-      (endOffset)="onMoveEnd($event, item.id)"
-      (rzStop)="onResizeStop($event, item.id)"
-      class="item-bounds"
-      *ngFor="let item of items"
-    >
-    <div [ngStyle]="styleGutter()" class="item-box" id={{item.id}}>
-      <mat-icon class="bin-button" aria-hidden="false" aria-lable="Drag and drop" fontIcon="delete" (click)="delete(item.id)">delete</mat-icon>
-      <div class="move-handle" #handle>
-        <mat-icon aria-hidden="false" aria-lable="Drag and drop" fontIcon="drag_indicator"></mat-icon>
-      </div>
-        <app-image-box *ngIf="item.type == 'image'"></app-image-box>
-        <app-text-box *ngIf="item.type == 'textbox'"></app-text-box>
-      </div>
+  </div> -->
+  <div class="row">
+    <div class="col-md-12">
+      <gridstack class="container" [options]="gridOptions" (changeCB)="onChange($event)" (resizeStopCB)="onResizeStop($event)"></gridstack>
     </div>
   </div>
 </div>

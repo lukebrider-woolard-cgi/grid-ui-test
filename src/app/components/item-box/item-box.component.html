@@ -1,0 +1,13 @@
+<div class="grid-stack-item" gs-w="2" gs-h="2">
+  <div class="grid-stack-item-content">
+    <div class="move-handle" #handle>
+      <mat-icon aria-hidden="false" aria-lable="Drag and drop" fontIcon="drag_indicator"></mat-icon>
+    </div>
+    <div *ngIf="type==='text'">
+      <app-text-box></app-text-box>
+    </div>
+    <div *ngIf="type==='image'">
+      <app-image-box></app-image-box>
+    </div>
+  </div>
+</div>
