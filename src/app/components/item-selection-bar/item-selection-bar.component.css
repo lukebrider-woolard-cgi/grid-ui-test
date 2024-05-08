@@ -4,5 +4,23 @@
   width: 50px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+.tools {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: flex-start;
+}
+
+.trash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 1 / 2;
+  background-color: palevioletred;
+  outline: solid 1px black;
+  outline-offset: -1px;
 }

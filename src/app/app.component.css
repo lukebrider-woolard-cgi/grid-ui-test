@@ -9,7 +9,7 @@ button {
 .workspace {
   display: flex;
   height: 600px;
-  margin: 10px;
+  margin: 20px;
 }
 .layout-area {
   position: relative;

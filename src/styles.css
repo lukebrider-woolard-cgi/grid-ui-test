@@ -15,18 +15,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   outline: solid 1px black;
 }
 
-.sidebar .grid-stack-item .grid-stack-item-content {
-  height: 50px;
-  width: 50px;
+.sidebar .tools .grid-stack-item .grid-stack-item-content {
+  width: 100%;
+  aspect-ratio: 1;
   background-color: white;
   margin-bottom: 2px;
   outline-offset: -1px;
   cursor: grab
 }
-.sidebar .grid-stack-item .grid-stack-item-content:active {
+.sidebar .tools .grid-stack-item .grid-stack-item-content:active {
   cursor: grabbing;
 }
-.sidebar .grid-stack-item .grid-stack-item-content .in-grid {
+.sidebar .tools .grid-stack-item .grid-stack-item-content .in-grid {
   display: none;
 }
 
