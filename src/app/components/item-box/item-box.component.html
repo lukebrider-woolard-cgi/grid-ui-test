@@ -2,7 +2,7 @@
   <div class="grid-stack-item-content">
     <div class="in-grid">
       <div class="move-handle" #handle>
-        <mat-icon aria-hidden="false" aria-lable="Drag and drop" fontIcon="drag_indicator"></mat-icon>
+        <mat-icon aria-hidden="false" aria-lable="Drag handle" fontIcon="drag_indicator"></mat-icon>
       </div>
       <div *ngIf="type==='text'">
         <app-text-box></app-text-box>
@@ -11,13 +11,13 @@
         <app-image-box></app-image-box>
       </div>
     </div>
-    <div class="out-grid">
-      <div *ngIf="type==='text'">
-        <p>Drag to add Text</p>
-      </div>
-      <div *ngIf="type==='image'">
-        <p>Drag to add Image</p>
-      </div>
+    <div class="in-sidebar">
+      <span *ngIf="type==='text'">
+        <mat-icon aria-hidden="true" fontIcon="text_snippet"></mat-icon>
+      </span>
+      <span *ngIf="type==='image'">
+        <mat-icon aria-hidden="true" fontIcon="image"></mat-icon>
+      </span>
     </div>
   </div>
 </div>
