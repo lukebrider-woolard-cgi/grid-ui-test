@@ -6,14 +6,20 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
 .tools {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
-
+.toolButton {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: white;
+  margin-bottom: 2px;
+  outline-offset: -1px;
+  cursor: pointer;
+}
 .trash {
   display: flex;
   justify-content: center;

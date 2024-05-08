@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { GridStack, GridStackOptions } from 'gridstack';
-import { GridstackModule, elementCB, gsCreateNgComponents, nodesCB } from 'gridstack/dist/angular';
+import { GridstackComponent, GridstackModule, NgGridStackOptions, gsCreateNgComponents } from 'gridstack/dist/angular';
 import { HeaderComponent } from './components/header/header.component';
 import { ItemSelectionBarComponent } from './components/item-selection-bar/item-selection-bar.component';
+import { TextBoxComponent } from './components/text-box/text-box.component';
+import { ImageBoxComponent } from './components/image-box/image-box.component';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +19,16 @@ import { ItemSelectionBarComponent } from './components/item-selection-bar/item-
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+  @ViewChild(GridstackComponent) gridComp?: GridstackComponent;
+
+  private serializedData?: NgGridStackOptions;
+  private id: number = 0;
+
   gridSize: number = 100;
   noOfColumns: number = 12;
   gridGutter: number = 10;
 
-  gridOptions: GridStackOptions = {
+  gridOptions: NgGridStackOptions = {
     column: this.noOfColumns,
     cellHeight: this.gridSize,
     margin: this.gridGutter,
@@ -30,28 +37,31 @@ export class AppComponent implements OnInit {
     draggable: {
       handle: '.move-handle'
     },
-    acceptWidgets: true,
     float: true,
+    children: []
   }
 
   ngOnInit(): void {
-    GridStack.addRemoveCB = gsCreateNgComponents;
-    GridStack.setupDragIn('.sidebar .grid-stack-item', { appendTo: 'body', helper: 'clone' });
+    GridstackComponent.addComponentToSelectorType([ImageBoxComponent, TextBoxComponent]); // only needed when loading in with items
   }
 
-  onChange(data: nodesCB) {
-    console.log('change ', data.nodes.length > 1 ? data.nodes : data.nodes[0]);
+  addWidget(type: string): void {
+    const newWidget = { x:0, y:0, w:2, h:2, selector:type, id:(String(this.id++))};
+    this.gridComp?.grid?.addWidget(newWidget);
   }
 
-  onResizeStop(data: elementCB) {
-    console.log('resizestop ', data.el.gridstackNode);
+  loadGrid(): void {
+    if (!this.gridComp) return;
+    GridStack.addGrid(this.gridComp.el, this.serializedData);
   }
 
-  save() {
-    console.log("save")
+  saveGrid(): void {
+    this.serializedData = this.gridComp?.grid?.save(false, true) as GridStackOptions || '';
+    console.log(JSON.stringify(this.serializedData, null, '  '))
   }
 
-  load() {
-    console.log("load")
+  clearGrid(): void {
+    if (!this.gridComp) return;
+    this.gridComp.grid?.removeAll();
   }
 }

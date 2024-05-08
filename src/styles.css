@@ -8,6 +8,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   opacity: 0.5;
 }
 
+.move-handle {
+  position: absolute;
+  top: 3px;
+  right: 0px;
+  cursor: move;
+  width: 24px;
+  height: 24px;
+  z-index: 100;
+}
+
 .grid-stack-item .grid-stack-item-content {
   display: flex;
   justify-content: center;

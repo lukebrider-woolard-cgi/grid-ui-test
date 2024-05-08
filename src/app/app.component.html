@@ -1,11 +1,12 @@
 <div>
   <app-header></app-header>
   <div class="button-bar">
-    <button (click)="save()">Save</button>
-    <button (click)="load()">Load</button>
+    <button (click)="loadGrid()">Load</button>
+    <button (click)="saveGrid()">Save</button>
+    <button (click)="clearGrid()">Clear</button>
   </div>
   <div class="workspace">
-    <app-item-selection-bar></app-item-selection-bar>
-    <gridstack class="layout-area" [options]="gridOptions" (changeCB)="onChange($event)" (resizeStopCB)="onResizeStop($event)"></gridstack>
+    <app-item-selection-bar (onItemAdd)="addWidget($event)"></app-item-selection-bar>
+    <gridstack class="layout-area" [options]="gridOptions"></gridstack>
   </div>
 </div>

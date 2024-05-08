@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { ItemBoxComponent } from '../item-box/item-box.component';
+import { ImageBoxComponent } from '../image-box/image-box.component';
+import { TextBoxComponent } from '../text-box/text-box.component';
 
 @Component({
   selector: 'app-item-selection-bar',
   standalone: true,
-  imports: [MatIconModule, ItemBoxComponent],
+  imports: [MatIconModule, ImageBoxComponent, TextBoxComponent],
   templateUrl: './item-selection-bar.component.html',
   styleUrl: './item-selection-bar.component.css'
 })
 export class ItemSelectionBarComponent {
+  @Output() onItemAdd: EventEmitter<string> = new EventEmitter();
 
+  addItemToGrid(type: string) {
+    this.onItemAdd.emit(type);
+  }
 }
