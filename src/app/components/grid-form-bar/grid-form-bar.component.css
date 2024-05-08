@@ -1,0 +1,16 @@
+.grid-form-container {
+  margin: 0 300px;
+  border: 1px solid steelblue;
+  border-radius: 5px;
+}
+.grid-form-container h4 {
+  margin-left: 10px;
+}
+.grid-form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.grid-form-input {
+  margin: 0 10px;
+}

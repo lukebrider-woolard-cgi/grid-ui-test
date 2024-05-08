@@ -1,0 +1,15 @@
+<div class="grid-form-container">
+  <h4>Grid Settings</h4>
+  <form class="grid-form">
+    <mat-form-field class="grid-form-input">
+      <mat-label>Grid Row Height</mat-label>
+      <input matInput name="gridSize" type="number" step="50" min="100" max="300" [(ngModel)]="gridRowHeight">
+      <span matTextSuffix>px</span>
+    </mat-form-field>
+    <mat-form-field class="grid-form-input">
+      <mat-label>Number of Columns</mat-label>
+      <input matInput name="noOfColumns" type="number" min="1" max="12" [(ngModel)]="noOfColumns">
+    </mat-form-field>
+    <button type="submit" (click)="onFormSubmit()">Update Grid</button>
+  </form>
+</div>
