@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   noOfColumns: number = 12;
   gridRowHeight: number = 100;
 
+  // Initial grid options
   gridOptions: GridStackOptions = {
     column: this.noOfColumns,
     cellHeight: this.gridRowHeight,

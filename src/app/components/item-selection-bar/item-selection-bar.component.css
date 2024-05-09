@@ -12,11 +12,12 @@
   flex-direction: column;
   justify-content: flex-start;
 }
-.toolButton {
+.tool-button {
   width: 100%;
   aspect-ratio: 1;
   background-color: white;
   margin-bottom: 2px;
+  outline: solid 1px black;
   outline-offset: -1px;
   cursor: pointer;
 }
