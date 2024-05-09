@@ -16,11 +16,11 @@ import { ImageBoxComponent } from './components/image-box/image-box.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+  // Access the grid via the wrapper so it can be updated
   @ViewChild(GridstackComponent) gridComp?: GridstackComponent;
 
   private serializedData?: NgGridStackOptions;
   private id: number = 0;
-
   gridRowHeight: number = 100;
   noOfColumns: number = 12;
 
@@ -28,16 +28,17 @@ export class AppComponent implements OnInit {
     column: this.noOfColumns,
     cellHeight: this.gridRowHeight,
     minRow: 1, // don't collapse when empty
-    removable: '.trash',
+    removable: '.trash', // div that acts as trash bin
     draggable: {
-      handle: '.move-handle'
+      handle: '.move-handle' // use handle to avoid click conflicts
     },
     float: true,
     children: []
   }
 
   ngOnInit(): void {
-    GridstackComponent.addComponentToSelectorType([ImageBoxComponent, TextBoxComponent]); // only needed when loading in with items
+    // All components to be added to the grid need to be included here or they won't work
+    GridstackComponent.addComponentToSelectorType([ImageBoxComponent, TextBoxComponent]);
   }
 
   updateGridFormat(settings: {cellSize: number, columns: number}): void {
