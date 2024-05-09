@@ -56,13 +56,18 @@ export class AppComponent implements OnInit {
     // load widgets
     this.gridComp.grid?.load(this.serializedData?.children ? this.serializedData?.children : [])
 
-    // set to default if get something unexpected back (column isn't present if set to default of 12)
-    const noOfColumns = typeof this.serializedData?.column === 'number' ? this.serializedData?.column : 12;
-    const gridRowHeight = this.serializedData?.cellHeight !== undefined ? this.serializedData?.cellHeight : '1em';
+    // set to default if get something unexpected back (values are not present if default values are set)
+    const noOfColumns = typeof this.serializedData?.column === 'number' ? this.serializedData?.column : this.noOfColumns;
+    let gridRowHeight = this.serializedData?.cellHeight !== undefined ? this.serializedData?.cellHeight : this.gridRowHeight;
 
-    // update grid format
+    // needed if using a value for cellHeight other than px
+    if (this.serializedData?.cellHeightUnit !== undefined) {
+      gridRowHeight = gridRowHeight + this.serializedData?.cellHeightUnit;
+    }
+
+    // update value for form
     this.noOfColumns = noOfColumns;
-    this.gridRowHeight = gridRowHeight
+    // update grid format
     this.gridComp.grid?.column(noOfColumns, 'moveScale');
     this.gridComp.grid?.cellHeight(gridRowHeight);
   }
