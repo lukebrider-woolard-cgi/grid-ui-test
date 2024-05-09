@@ -1,6 +1,6 @@
 <div>
   <app-header></app-header>
-  <app-grid-form-bar [gridRowHeight]="gridRowHeight" [noOfColumns]="noOfColumns" (onSubmit)="updateGridFormat($event)"></app-grid-form-bar>
+  <app-grid-form-bar [noOfColumns]="noOfColumns" [gridRowHeight]="gridRowHeight" (onSubmit)="updateGridFormat($event)"></app-grid-form-bar>
   <div class="button-bar">
     <button (click)="loadGrid()">Load</button>
     <button (click)="saveGrid()">Save</button>

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GridStack, GridStackOptions } from 'gridstack';
+import { GridStackOptions, GridStackWidget } from 'gridstack';
 import { GridstackComponent, GridstackModule, NgGridStackOptions } from 'gridstack/dist/angular';
 import { HeaderComponent } from './components/header/header.component';
 import { GridFormBarComponent } from './components/grid-form-bar/grid-form-bar.component';
@@ -19,12 +19,12 @@ export class AppComponent implements OnInit {
   // Access the grid via the wrapper so it can be updated
   @ViewChild(GridstackComponent) gridComp?: GridstackComponent;
 
-  serializedData?: NgGridStackOptions;
+  serializedData?: GridStackOptions;
   id: number = 0;
-  gridRowHeight: number = 100;
   noOfColumns: number = 12;
+  gridRowHeight: number = 100;
 
-  gridOptions: NgGridStackOptions = {
+  gridOptions: GridStackOptions = {
     column: this.noOfColumns,
     cellHeight: this.gridRowHeight,
     minRow: 1, // don't collapse when empty
@@ -41,9 +41,9 @@ export class AppComponent implements OnInit {
     GridstackComponent.addComponentToSelectorType([ImageBoxComponent, TextBoxComponent]);
   }
 
-  updateGridFormat(settings: {cellSize: number, columns: number}): void {
-    this.gridComp?.grid?.column(settings.columns);
-    this.gridComp?.grid?.cellHeight(settings.cellSize);
+  updateGridFormat(settings: {columns: number, rowHeight: number}): void {
+    this.gridComp?.grid?.column(settings.columns, 'moveScale');
+    this.gridComp?.grid?.cellHeight(settings.rowHeight);
   }
 
   addWidget(type: string): void {
@@ -53,11 +53,18 @@ export class AppComponent implements OnInit {
 
   loadGrid(): void {
     if (!this.gridComp) return;
-    GridStack.addGrid(this.gridComp.el, this.serializedData);
+    // load widgets
+    this.gridComp.grid?.load(this.serializedData?.children ? this.serializedData?.children : [])
 
     // set to default if get something unexpected back (column isn't present if set to default of 12)
-    this.gridRowHeight = this.serializedData?.cellHeight !== undefined ? this.serializedData?.cellHeight as number : 100;
-    this.noOfColumns = typeof this.serializedData?.column === 'number' ? this.serializedData?.column : 12;
+    const noOfColumns = typeof this.serializedData?.column === 'number' ? this.serializedData?.column : 12;
+    const gridRowHeight = this.serializedData?.cellHeight !== undefined ? this.serializedData?.cellHeight as number : 100;
+
+    // update grid format
+    this.noOfColumns = noOfColumns;
+    this.gridRowHeight = gridRowHeight
+    this.gridComp.grid?.column(noOfColumns, 'moveScale');
+    this.gridComp.grid?.cellHeight(gridRowHeight);
   }
 
   saveGrid(): void {
