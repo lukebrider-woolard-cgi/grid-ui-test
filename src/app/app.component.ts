@@ -19,8 +19,8 @@ export class AppComponent implements OnInit {
   // Access the grid via the wrapper so it can be updated
   @ViewChild(GridstackComponent) gridComp?: GridstackComponent;
 
-  private serializedData?: NgGridStackOptions;
-  private id: number = 0;
+  serializedData?: NgGridStackOptions;
+  id: number = 0;
   gridRowHeight: number = 100;
   noOfColumns: number = 12;
 
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     draggable: {
       handle: '.move-handle' // use handle to avoid click conflicts
     },
-    float: true,
+    float: true, // determines whether items can be placed anywhere or stack vertically
     children: []
   }
 
@@ -54,6 +54,10 @@ export class AppComponent implements OnInit {
   loadGrid(): void {
     if (!this.gridComp) return;
     GridStack.addGrid(this.gridComp.el, this.serializedData);
+
+    // set to default if get something unexpected back (column isn't present if set to default of 12)
+    this.gridRowHeight = this.serializedData?.cellHeight !== undefined ? this.serializedData?.cellHeight as number : 100;
+    this.noOfColumns = typeof this.serializedData?.column === 'number' ? this.serializedData?.column : 12;
   }
 
   saveGrid(): void {
