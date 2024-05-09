@@ -7,8 +7,6 @@
   box-sizing:border-box;
   padding: 1em;
   background-color: white;
-  outline: solid 1px black;
-  overflow-y: auto;
-  scrollbar-gutter: stable;
+  overflow-y: hidden;
   resize: none;
 }

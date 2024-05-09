@@ -12,10 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class GridFormBarComponent {
   @Input() noOfColumns: number;
-  @Input() gridRowHeight: number;
-  @Output() onSubmit: EventEmitter<{rowHeight: number, columns: number}> = new EventEmitter();
+  // @Input() gridRowHeight: number;
+  @Output() onSubmit: EventEmitter<number> = new EventEmitter();
 
   onFormSubmit() {
-    this.onSubmit.emit({columns: this.noOfColumns, rowHeight: this.gridRowHeight});
+    this.onSubmit.emit(this.noOfColumns);
   }
 }

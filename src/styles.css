@@ -7,7 +7,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .grid-stack-item-removing {
   opacity: 0.5;
 }
-
 .move-handle {
   position: absolute;
   top: 3px;
@@ -17,32 +16,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: 24px;
   z-index: 100;
 }
-
 .grid-stack-item .grid-stack-item-content {
   display: flex;
   justify-content: center;
   align-items: center;
   outline: solid 1px black;
-}
-
-.sidebar .tools .grid-stack-item .grid-stack-item-content {
-  width: 100%;
-  aspect-ratio: 1;
-  background-color: white;
-  margin-bottom: 2px;
-  outline-offset: -1px;
-  cursor: grab
-}
-.sidebar .tools .grid-stack-item .grid-stack-item-content:active {
-  cursor: grabbing;
-}
-.sidebar .tools .grid-stack-item .grid-stack-item-content .in-grid {
-  display: none;
-}
-
-.layout-area .grid-stack-item .grid-stack-item-content {
-  background-color: aliceblue;
-}
-.layout-area .grid-stack-item .grid-stack-item-content .in-sidebar {
-  display: none;
 }

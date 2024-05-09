@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GridStackOptions, GridStackWidget } from 'gridstack';
-import { GridstackComponent, GridstackModule, NgGridStackOptions } from 'gridstack/dist/angular';
+import { GridStackOptions, numberOrString } from 'gridstack';
+import { GridstackComponent, GridstackModule } from 'gridstack/dist/angular';
 import { HeaderComponent } from './components/header/header.component';
 import { GridFormBarComponent } from './components/grid-form-bar/grid-form-bar.component';
 import { ItemSelectionBarComponent } from './components/item-selection-bar/item-selection-bar.component';
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   serializedData?: GridStackOptions;
   id: number = 0;
   noOfColumns: number = 12;
-  gridRowHeight: number = 100;
+  gridRowHeight: numberOrString = '5em';
 
   // Initial grid options
   gridOptions: GridStackOptions = {
@@ -42,9 +42,8 @@ export class AppComponent implements OnInit {
     GridstackComponent.addComponentToSelectorType([ImageBoxComponent, TextBoxComponent]);
   }
 
-  updateGridFormat(settings: {columns: number, rowHeight: number}): void {
-    this.gridComp?.grid?.column(settings.columns, 'moveScale');
-    this.gridComp?.grid?.cellHeight(settings.rowHeight);
+  updateGridFormat(columns: number): void {
+    this.gridComp?.grid?.column(columns, 'moveScale');
   }
 
   addWidget(type: string): void {
@@ -59,7 +58,7 @@ export class AppComponent implements OnInit {
 
     // set to default if get something unexpected back (column isn't present if set to default of 12)
     const noOfColumns = typeof this.serializedData?.column === 'number' ? this.serializedData?.column : 12;
-    const gridRowHeight = this.serializedData?.cellHeight !== undefined ? this.serializedData?.cellHeight as number : 100;
+    const gridRowHeight = this.serializedData?.cellHeight !== undefined ? this.serializedData?.cellHeight : '1em';
 
     // update grid format
     this.noOfColumns = noOfColumns;
